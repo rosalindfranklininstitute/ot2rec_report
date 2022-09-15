@@ -1,0 +1,16 @@
+import json
+from glob import glob
+
+
+def read_ipynb(filename):
+    file_check = glob(filename)
+    assert len(file_check)==1, \
+        f"ERROR: file {filename} not found."
+
+    with open(filename, 'r') as f:
+        return json.load(f)
+
+
+cells_master = read_ipynb("report_master.ipynb")
+cells_1 = read_ipynb("report_1.ipynb")
+cells_2 = read_ipynb("report_2.ipynb")
