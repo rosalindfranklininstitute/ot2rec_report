@@ -33,7 +33,8 @@ setup(
         "scipy",
         "matplotlib",
         "pandas",
-        "networkx"
+        "networkx",
+        "pydot"
     ],
     entry_points={
         "console_scripts": [
