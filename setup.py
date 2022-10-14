@@ -37,7 +37,8 @@ setup(
         "networkx",
         "pydot",
         "icecream",
-        "pyyaml"
+        "pyyaml",
+        "papermill",
     ],
     entry_points={
         "console_scripts": [
