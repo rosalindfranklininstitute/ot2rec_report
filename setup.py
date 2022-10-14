@@ -29,12 +29,14 @@ setup(
     zip_safe=False,
     install_requires=[
         "jupyterlab",
+        "jupyter",
         "numpy",
         "scipy",
         "matplotlib",
         "pandas",
         "networkx",
-        "pydot"
+        "pydot",
+        "icecream"
     ],
     entry_points={
         "console_scripts": [

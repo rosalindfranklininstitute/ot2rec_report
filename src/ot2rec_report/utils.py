@@ -5,7 +5,7 @@ def get_processes(plist):
     node_list = []
     for curr_proc in plist:
         # Find relevant log files
-        file_lookfor = f"{os.getcwd()}/{curr_proc}.log"
+        file_lookfor = f"{os.getcwd()}/o2r_{curr_proc}.log"
         file_found = len(glob(file_lookfor))==1
 
         try:
@@ -15,7 +15,7 @@ def get_processes(plist):
 
         if file_found:
             node_list.append(curr_proc)
-    
+
     return node_list
 
 # def get_process_from_dir(directory):
@@ -24,4 +24,3 @@ def get_processes(plist):
 #         if file.endswith(".log"):
 #             node_list.append(file)
 #     return node_list
-

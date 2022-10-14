@@ -8,8 +8,8 @@ import argparse
 import subprocess
 import logging
 
-from RepoTemp.templates import *
-from RepoTemp import utils
+from ot2rec_report.templates import *
+from ot2rec_report import utils
 
 
 logging.basicConfig(level=logging.INFO)
@@ -22,8 +22,15 @@ def write_nb(nb_data, nb_path):
 
 def main():
     lookup_dict = {
-        "1": nb_1,
-        "2": nb_2,
+        "motioncor2": nb_mc,
+        "ctffind": nb_ctffind,
+        "ctfsim": nb_ctfsim,
+        "imod_header": nb_imod_header,
+        "imod_align": nb_imod_align,
+        "imod_recon": nb_imod_recon,
+        "aretomo_recon": nb_aretomo_recon,
+        "savu_recon": nb_savu_recon,
+        "rlf_deconv": nb_rlf_deconv,
     }
 
     parser = argparse.ArgumentParser()
@@ -41,6 +48,8 @@ def main():
 
     # Add in cells to final notebook
     for curr_proc in node_list:
+        if curr_proc == "imod_align":
+            final_nb["cells"] = final_nb["cells"] + lookup_dict["imod_header"]["cells"]
         final_nb["cells"] = final_nb["cells"] + lookup_dict[curr_proc]["cells"]
 
 
@@ -52,7 +61,7 @@ def main():
     # Export HTML
     if args.to_html:
         cmd = [
-            "jupyter", "nbconvert",
+            "jupyter-nbconvert",
             "--execute",
             "--to", "html",
             "--TemplateExporter.exclude_input=True",
