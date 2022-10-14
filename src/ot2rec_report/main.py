@@ -8,6 +8,8 @@ import argparse
 import subprocess
 import logging
 
+import papermill as pm
+
 from ot2rec_report.templates import *
 from ot2rec_report import utils
 
@@ -34,6 +36,8 @@ def main():
     }
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("rootname",
+                        help="Rootname of project",)
     parser.add_argument("--to_html",
                       help="Export report to html",
                       action="store_true")
@@ -53,9 +57,22 @@ def main():
         final_nb["cells"] = final_nb["cells"] + lookup_dict[curr_proc]["cells"]
 
 
-    # Write out final notebook
-    write_nb(final_nb, "./report.ipynb")
+    # Write out template notebook
+    write_nb(final_nb, "./report_temp.ipynb")
+
+    # Use papermill to populate empty notebook
+    params = dict(
+        rootname = args.rootname,
+    )
+    pm.execute_notebook(
+        "./report_temp.ipynb",
+        "./report.ipynb",
+        parameters=params
+    )
+
     logging.info("Report notebook created.")
+
+
 
 
     # Export HTML
