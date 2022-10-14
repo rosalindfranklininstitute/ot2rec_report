@@ -39,6 +39,7 @@ setup(
         "icecream",
         "pyyaml",
         "papermill",
+        "seaborn",
     ],
     entry_points={
         "console_scripts": [
