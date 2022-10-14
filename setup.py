@@ -36,7 +36,8 @@ setup(
         "pandas",
         "networkx",
         "pydot",
-        "icecream"
+        "icecream",
+        "pyyaml"
     ],
     entry_points={
         "console_scripts": [
