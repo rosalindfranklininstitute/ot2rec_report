@@ -36,7 +36,7 @@ def main():
     }
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("rootname",
+    parser.add_argument("proj_name",
                         help="Rootname of project",)
     parser.add_argument("--to_html",
                       help="Export report to html",
@@ -62,7 +62,7 @@ def main():
 
     # Use papermill to populate empty notebook
     params = dict(
-        rootname = args.rootname,
+        rootname = args.proj_name,
     )
     pm.execute_notebook(
         "./report_temp.ipynb",
