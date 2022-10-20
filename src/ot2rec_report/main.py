@@ -44,7 +44,7 @@ def main():
 
     args = parser.parse_args()
 
-    final_nb = dc(nb_master)
+    final_nb = dc(nb_main)
     node_list = utils.get_processes(PROCESSES)
 
     # Add workflow diagram

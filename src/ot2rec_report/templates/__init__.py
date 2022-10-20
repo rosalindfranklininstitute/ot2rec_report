@@ -14,7 +14,7 @@ def read_ipynb(filename):
         return json.load(f)
 
 
-nb_master = read_ipynb("report_master.ipynb")
+nb_main = read_ipynb("report_main.ipynb")
 nb_mc = read_ipynb("report_mc.ipynb")
 nb_ctffind = read_ipynb("report_ctffind.ipynb")
 nb_ctfsim = read_ipynb("report_ctfsim.ipynb")
