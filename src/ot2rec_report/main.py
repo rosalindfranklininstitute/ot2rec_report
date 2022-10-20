@@ -49,31 +49,30 @@ def main():
 
     # Add workflow diagram
     final_nb["cells"] = final_nb["cells"] + nb_workflow_diagram["cells"]
+    logging.info(f"Added workflow diagram")
 
     # Add in cells to final notebook
     for curr_proc in node_list:
         if curr_proc == "imod_align":
             final_nb["cells"] = final_nb["cells"] + lookup_dict["imod_header"]["cells"]
         final_nb["cells"] = final_nb["cells"] + lookup_dict[curr_proc]["cells"]
-
+        logging.info(f"Added {curr_proc}.")
 
     # Write out template notebook
     write_nb(final_nb, "./report_temp.ipynb")
 
     # Use papermill to populate empty notebook
     params = dict(
-        rootname = args.proj_name,
+        proj_name = args.proj_name,
     )
+
     pm.execute_notebook(
         "./report_temp.ipynb",
         "./report.ipynb",
-        parameters=params
+        parameters=params,
     )
 
     logging.info("Report notebook created.")
-
-
-
 
     # Export HTML
     if args.to_html:
