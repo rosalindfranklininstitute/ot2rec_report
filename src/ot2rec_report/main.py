@@ -30,7 +30,7 @@ def main():
         "imod_header": nb_imod_header,
         "imod_align": nb_imod_align,
         "imod_recon": nb_imod_recon,
-        "aretomo_recon": nb_aretomo_recon,
+        "aretomo": nb_aretomo,
         "savurecon": nb_savu_recon,
         "rlf_deconv": nb_rlf_deconv,
     }
