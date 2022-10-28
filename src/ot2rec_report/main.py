@@ -30,8 +30,8 @@ def main():
         "imod_header": nb_imod_header,
         "imod_align": nb_imod_align,
         "imod_recon": nb_imod_recon,
-        "aretomo_recon": nb_aretomo_recon,
-        "savu_recon": nb_savu_recon,
+        "aretomo": nb_aretomo,
+        "savurecon": nb_savu_recon,
         "rlf_deconv": nb_rlf_deconv,
     }
 
@@ -44,36 +44,35 @@ def main():
 
     args = parser.parse_args()
 
-    final_nb = dc(nb_master)
+    final_nb = dc(nb_main)
     node_list = utils.get_processes(PROCESSES)
 
     # Add workflow diagram
     final_nb["cells"] = final_nb["cells"] + nb_workflow_diagram["cells"]
+    logging.info(f"Added workflow diagram")
 
     # Add in cells to final notebook
     for curr_proc in node_list:
         if curr_proc == "imod_align":
             final_nb["cells"] = final_nb["cells"] + lookup_dict["imod_header"]["cells"]
         final_nb["cells"] = final_nb["cells"] + lookup_dict[curr_proc]["cells"]
-
+        logging.info(f"Added {curr_proc}.")
 
     # Write out template notebook
     write_nb(final_nb, "./report_temp.ipynb")
 
     # Use papermill to populate empty notebook
     params = dict(
-        rootname = args.proj_name,
+        proj_name = args.proj_name,
     )
+
     pm.execute_notebook(
         "./report_temp.ipynb",
         "./report.ipynb",
-        parameters=params
+        parameters=params,
     )
 
     logging.info("Report notebook created.")
-
-
-
 
     # Export HTML
     if args.to_html:
