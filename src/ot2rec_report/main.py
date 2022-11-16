@@ -30,6 +30,7 @@ def main():
         "imod_header": nb_imod_header,
         "imod_align": nb_imod_align,
         "imod_recon": nb_imod_recon,
+        "aretomo_header": nb_aretomo_header,
         "aretomo_align": nb_aretomo_align,
         "aretomo_recon": nb_aretomo_recon,
         "savu_recon": nb_savu_recon,
@@ -48,14 +49,22 @@ def main():
     final_nb = dc(nb_main)
     node_list = utils.get_processes(PROCESSES)
 
+    # Check if AreTomo has been used
+    at_list = list(i for i, s in enumerate(node_list) if "aretomo" in s)
+    at_used = len(at_list) > 0
+    if at_used:
+        at_first_idx = at_list[0]
+
     # Add workflow diagram
     final_nb["cells"] = final_nb["cells"] + nb_workflow_diagram["cells"]
     logging.info(f"Added workflow diagram")
 
     # Add in cells to final notebook
-    for curr_proc in node_list:
+    for idx, curr_proc in enumerate(node_list):
         if curr_proc == "imod_align":
             final_nb["cells"] = final_nb["cells"] + lookup_dict["imod_header"]["cells"]
+        elif at_used and idx==at_first_idx:
+            final_nb["cells"] = final_nb["cells"] + lookup_dict["aretomo_header"]["cells"]
         final_nb["cells"] = final_nb["cells"] + lookup_dict[curr_proc]["cells"]
         logging.info(f"Added {curr_proc}.")
 
