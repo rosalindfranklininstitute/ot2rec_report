@@ -88,7 +88,6 @@ def main():
     if args.to_html:
         cmd = [
             "jupyter-nbconvert",
-            "--execute",
             "--to", "html",
             "--TemplateExporter.exclude_input=True",
             "./report.ipynb"]
