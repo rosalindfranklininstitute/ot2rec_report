@@ -43,6 +43,9 @@ def main():
     parser.add_argument("--to_html",
                       help="Export report to html",
                       action="store_true")
+    parser.add_argument("--to_slides",
+                      help="Export report as Jupyter Slides",
+                      action="store_true")
 
     args = parser.parse_args()
 
@@ -97,6 +100,30 @@ def main():
                              stderr=subprocess.STDOUT,
                              encoding="ascii",
                              check=True)
+
+        try:
+            assert(not exp.stderr)
+        except:
+            print(exp.stderr)
+    
+    # Export slides
+    if args.to_slides:
+        cmd = [
+            "jupyter-nbconvert",
+            "./report.ipynb",
+            "--to", "slides",
+            "--TemplateExporter.exclude_input=True",
+            "--SlidesExporter.reveal_theme=simple",
+            "--SlidesExporter.reveal_scroll=True"
+        ]
+
+        exp = subprocess.run(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            encoding="ascii",
+            check=True
+        )
 
         try:
             assert(not exp.stderr)
