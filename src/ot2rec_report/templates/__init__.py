@@ -5,7 +5,7 @@ from glob import glob
 import ot2rec_report.templates
 
 
-PROCESSES = ["motioncor2", "ctffind", "ctfsim", "imod_align", "imod_recon", "aretomo_align", "aretomo_recon", "savu_recon", "rlf_deconv"]
+PROCESSES = ["motioncor2", "ctffind", "ctfsim", "imod_align", "imod_recon", "aretomo_align", "aretomo_recon", "savu_recon", "rldeconv"]
 
 def read_ipynb(filename):
     fn = pkg_resources.resource_filename("ot2rec_report.templates", filename)
