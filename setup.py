@@ -36,7 +36,12 @@ setup(
         "pandas",
         "networkx",
         "pydot",
-        "icecream"
+        "icecream",
+        "pyyaml",
+        "papermill",
+        "seaborn",
+        "mrcfile",
+        "tifffile",
     ],
     entry_points={
         "console_scripts": [
