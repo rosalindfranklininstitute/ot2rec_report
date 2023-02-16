@@ -27,6 +27,7 @@ def main():
         "motioncor2": nb_mc,
         "ctffind": nb_ctffind,
         "ctfsim": nb_ctfsim,
+        "exclude_bad_tilts": nb_ebt,
         "imod_header": nb_imod_header,
         "imod_align": nb_imod_align,
         "imod_recon": nb_imod_recon,

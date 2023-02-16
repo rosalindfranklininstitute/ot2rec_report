@@ -5,7 +5,7 @@ from glob import glob
 import ot2rec_report.templates
 
 
-PROCESSES = ["motioncor2", "ctffind", "ctfsim", "imod_align", "imod_recon", "aretomo_align", "aretomo_recon", "savu_recon", "rlf_deconv"]
+PROCESSES = ["motioncor2", "ctffind", "ctfsim", "exclude_bad_tilts", "imod_align", "imod_recon", "aretomo_align", "aretomo_recon", "savu_recon", "rlf_deconv"]
 
 def read_ipynb(filename):
     fn = pkg_resources.resource_filename("ot2rec_report.templates", filename)
@@ -27,3 +27,4 @@ nb_aretomo_align = read_ipynb("report_aretomo_align.ipynb")
 nb_savu_recon = read_ipynb("report_savu_recon.ipynb")
 nb_rlf_deconv = read_ipynb("report_rlf_deconv.ipynb")
 nb_workflow_diagram = read_ipynb("workflow_diagram.ipynb")
+nb_ebt = read_ipynb("report_excludebadtilts.ipynb")
