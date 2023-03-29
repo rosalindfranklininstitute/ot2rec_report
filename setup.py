@@ -19,7 +19,7 @@ from setuptools import setup, find_packages
 setup(
     version="0.1.0",
     name="ot2rec_report",
-    description="ot2rec_report",
+    description="Generate reports for Ot2Rec",
     url="https://github.com/rosalindfranklininstitute/ot2rec_report.git",
     include_package_data=True,
     packages=find_packages("src"),
