@@ -17,7 +17,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    version='0.0.1a',
+    version='0.1.0',
     name='ot2rec_report',
     description='ot2rec_report',
     url='https://github.com/rosalindfranklininstitute/ot2rec_report.git',
@@ -42,6 +42,9 @@ setup(
         "seaborn",
         "mrcfile",
         "tifffile",
+        "magicgui[pyqt5]",
+        "networkx",
+        "pydot",
     ],
     entry_points={
         "console_scripts": [
