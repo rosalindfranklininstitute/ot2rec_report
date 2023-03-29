@@ -14,16 +14,24 @@
 
 
 from setuptools import setup, find_packages
+from glob import glob
+from pathlib import Path
 
+# read contents of readme
+this_dir = Path(__file__).parent
+long_description = (this_dir / "README.md").read_text()
 
 setup(
-    version="0.1.0",
+    version="0.1.0a",
     name="ot2rec_report",
     description="Generate reports for Ot2Rec",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/rosalindfranklininstitute/ot2rec_report.git",
     include_package_data=True,
     packages=find_packages("src"),
     package_dir={"": "src"},
+    data_files=[("templates", glob("src/ot2rec_report/templates/*ipynb"))],
     test_suite="tests",
     license="Apache License, Version 2.0",
     zip_safe=False,
