@@ -23,6 +23,7 @@ def write_nb(nb_data, nb_path):
     with open(nb_path, "w", encoding="utf-8") as f:
         json.dump(nb_data, f)
 
+
 class Choices(Enum):
     none = auto()
     workflow_diagram = auto()
@@ -52,16 +53,11 @@ class Choices(Enum):
         "widget_type": "Select",
         "choices": Choices,
     },
-    notes={
-        "label": "Notes to add to report",
-        "widget_type": "TextEdit"
-    },
+    notes={"label": "Notes to add to report", "widget_type": "TextEdit"},
     to_html={
         "label": "Export to html",
     },
-    to_slides={
-        "label": "Export to Jupyter slides"
-    }
+    to_slides={"label": "Export to Jupyter slides"},
 )
 def get_args_o2r_report(
     project_name="",
@@ -76,7 +72,7 @@ def get_args_o2r_report(
 def read_ipynb(filename):
     fn = pkg_resources.resource_filename("ot2rec_report.templates", filename)
 
-    with open(fn, 'r') as f:
+    with open(fn, "r") as f:
         return json.load(f)
 
 
@@ -113,7 +109,7 @@ def main():
     for idx, curr_proc in enumerate(node_list):
         if curr_proc == "imod_align":
             final_nb["cells"] += lookup_dict["imod_header"]["cells"]
-        elif at_used and idx==at_first_idx:
+        elif at_used and idx == at_first_idx:
             final_nb["cells"] += lookup_dict["aretomo_header"]["cells"]
         final_nb["cells"] += lookup_dict[curr_proc]["cells"]
         logging.info(f"Added {curr_proc}.")
@@ -123,9 +119,9 @@ def main():
 
     # Use papermill to populate empty notebook
     params = dict(
-        proj_name = args.project_name.value,
-        node_list = node_list,
-        notes = args.notes.value,
+        proj_name=args.project_name.value,
+        node_list=node_list,
+        notes=args.notes.value,
     )
 
     pm.execute_notebook(
@@ -140,18 +136,22 @@ def main():
     if args.to_html.value is True:
         cmd = [
             "jupyter-nbconvert",
-            "--to", "html",
+            "--to",
+            "html",
             "--TemplateExporter.exclude_input=True",
-            "./report.ipynb"]
+            "./report.ipynb",
+        ]
 
-        exp = subprocess.run(cmd,
-                             stdout=subprocess.PIPE,
-                             stderr=subprocess.STDOUT,
-                             encoding="ascii",
-                             check=True)
+        exp = subprocess.run(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            encoding="ascii",
+            check=True,
+        )
 
         try:
-            assert(not exp.stderr)
+            assert not exp.stderr
         except:
             print(exp.stderr)
 
@@ -160,10 +160,11 @@ def main():
         cmd = [
             "jupyter-nbconvert",
             "./report.ipynb",
-            "--to", "slides",
+            "--to",
+            "slides",
             "--TemplateExporter.exclude_input=True",
             "--SlidesExporter.reveal_theme=simple",
-            "--SlidesExporter.reveal_scroll=True"
+            "--SlidesExporter.reveal_scroll=True",
         ]
 
         exp = subprocess.run(
@@ -171,10 +172,10 @@ def main():
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             encoding="ascii",
-            check=True
+            check=True,
         )
 
         try:
-            assert(not exp.stderr)
+            assert not exp.stderr
         except:
             print(exp.stderr)
