@@ -26,17 +26,30 @@ If you have any ideas on what you'd like included in the reports, file an [issue
 
 ## Installation
 
-We strongly advise using a virtual environment, separate to the one you use for `Ot2Rec`.
+We highly recommend using a virtual environment, e.g., conda
 
-We will support PyPI installs in the future, but for now, you'll need to clone our Github repo and install it locally.
+```sh
+conda create -n ot2rec_report pip python=3.10
+conda activate ot2rec_report
+```
 
-To do this:
+To install from PyPI:
+```sh
+pip install ot2rec-report
+```
+
+To install from source:
 
 ```sh
 git clone https://github.com/rosalindfranklininstitute/ot2rec_report.git
 conda create -n o2r_report
 conda activate o2r_report
 pip install -e .
+```
+
+If you encounter any issues with `pydot`, with your conda environment activated:
+```
+conda install -c conda-forge graphviz
 ```
 
 ## Usage
@@ -46,27 +59,17 @@ In your terminal, navigate to the folder where your `Ot2Rec` processing has been
 Once you're there:
 
 ```sh
-o2r.report.run <project_name>
+o2r.report.run
 ```
 
-Replace *project_name* with the project name of your experiment, same as you'd have used for Ot2Rec. This is normally the first part of the filename, e.g. *TS* would be the project name for *TS_001_0.0.mrc*. 
+A GUI will pop up to capture your input:
 
-This will produce a Jupyter notebook with the report.
+- Project name is the project name of your experiment, same as you'd have used for Ot2Rec. This is normally the first part of the filename, e.g. *TS* would be the project name for *TS_001_0.0.mrc*. 
+- Choice of sections to include in the report. Hold down Ctrl to select more than one.
+- Export to html: If you'd like this Jupyter notebook without the code as a html report. Your report.html will be created in the same directory. You can print this as a pdf if you'd like to.
+- Export to slides: This creates a report.slides.html file which you can view and present in your browser.
 
-If you'd like this Jupyter notebook without the code as a html report,
-```sh
-o2r.report.run <project_name> --to_html
-```
-
-Your report.html will be created in the same directory. You can print this as a pdf if you'd like to.
-
-Alternatively, if you want the report in a slideshow format, use:
-
-```sh
-o2r.report.run <project_name> --to_slides
-```
-
-This creates a report.slides.html file which you can view and present in your browser.
+By default, a Jupyter notebook `report.ipynb` is produced which contains the report.
 
 ## Contributing
 
@@ -74,7 +77,11 @@ Contributions are very welcome, it does not have to be through code! If you have
 
 ## Citing
 
-tbc
+If you have found Ot2Rec useful, please cite us:
+
+Ot2Rec: A Semi-Automatic, Extensible, Multi-Software Tomographic Reconstruction Workflow
+Neville B.-y. Yee, Elaine M. L. Ho, Win Tun, Jake L. R. Smith, Maud Dumoux, Michael Grange, Michele C. Darrow, Mark Basham
+bioRxiv 2022.12.15.520632; doi: https://doi.org/10.1101/2022.12.15.520632
 
 ## Funding
 
