@@ -76,7 +76,7 @@ def read_ipynb(filename):
         return json.load(f)
 
 
-def main():
+def main(args=None):
     lookup_dict = {
         "workflow_diagram": read_ipynb("workflow_diagram.ipynb"),
         "motioncor2": read_ipynb("report_mc.ipynb"),
@@ -94,7 +94,8 @@ def main():
         "rlf_deconv": read_ipynb("report_rlf_deconv.ipynb"),
     }
 
-    args = get_args_o2r_report.show(run=True)
+    if args is None:
+        args = get_args_o2r_report.show(run=True)
 
     final_nb = dc(read_ipynb("report_main.ipynb"))
     node_list = [i.name for i in args.processes.value]
