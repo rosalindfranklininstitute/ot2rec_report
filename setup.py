@@ -22,7 +22,7 @@ this_dir = Path(__file__).parent
 long_description = (this_dir / "README.md").read_text()
 
 setup(
-    version="0.1.0post2",
+    version="0.1.0post3",
     name="ot2rec_report",
     description="Generate reports for Ot2Rec",
     long_description=long_description,
